@@ -1,0 +1,12 @@
+{
+  "name": "healthone-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HealthOne static demo on Railway",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
