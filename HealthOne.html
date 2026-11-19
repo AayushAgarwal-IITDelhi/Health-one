@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>HealthOne</title>
+<style>
+:root{--bg:#f4f7f9;--cd:#fff;--tx:#14202b;--mu:#5b6b7a;--bd:#dfe6ec;--pr:#0f766e;--ok:#15803d;--okb:#e3f4e9;--wn:#a15c07;--wnb:#fdf0d9;--bad:#b91c1c;--badb:#fde7e7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e151b;--cd:#17212a;--tx:#e8eef3;--mu:#97a7b6;--bd:#27343f;--pr:#2dd4bf;--ok:#4ade80;--okb:#12301f;--wn:#fbbf24;--wnb:#3a2b0c;--bad:#f87171;--badb:#3d1717;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0e151b;--cd:#17212a;--tx:#e8eef3;--mu:#97a7b6;--bd:#27343f;--pr:#2dd4bf;--ok:#4ade80;--okb:#12301f;--wn:#fbbf24;--wnb:#3a2b0c;--bad:#f87171;--badb:#3d1717;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.app{display:flex;min-height:100vh}aside{width:224px;background:var(--cd);border-right:1px solid var(--bd);padding:16px 10px;position:sticky;top:0;height:100vh;flex:none}
+.logo{font-weight:700;font-size:19px;padding:4px 10px 14px}.logo b{color:var(--pr)}.logo small{display:block;font-weight:400;font-size:11px;color:var(--mu)}
+aside a{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:8px;color:var(--mu);cursor:pointer;text-decoration:none;font-weight:500}aside a.on{background:var(--okb);color:var(--pr)}aside a:hover{color:var(--tx)}aside a.em{color:var(--bad)}
+main{flex:1;padding:22px;max-width:1100px;min-width:0}h1{font-size:22px;margin:0 0 4px}h3{font-size:15px;margin:0 0 10px}.mu{color:var(--mu)}small,.sm{font-size:12.5px;color:var(--mu)}
+.demo{background:var(--wnb);color:var(--wn);border-radius:8px;padding:8px 12px;font-size:13px;margin:10px 0 16px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.g2{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}
+.big{font-size:26px;font-weight:700;letter-spacing:-.5px}.big small{font-weight:400}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600}.chip.ok{background:var(--okb);color:var(--ok)}.chip.wn{background:var(--wnb);color:var(--wn)}.chip.bd{background:var(--badb);color:var(--bad)}
+svg.sp{width:100%;height:auto;display:block}.btn{background:var(--pr);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer}:root[data-theme=dark] .btn{color:#06201c}@media(prefers-color-scheme:dark){.btn{color:#06201c}}
+.btn.sec{background:transparent;color:var(--pr);border:1px solid var(--bd)}.btn.red{background:var(--bad);color:#fff}
+input,select{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}label{display:block;font-size:13px;color:var(--mu);margin-bottom:8px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}.q{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd);flex-wrap:wrap}.rad label{display:inline-flex;gap:4px;margin:0 0 0 10px;color:var(--tx)}.rad input,.chk input{width:auto}.chk{display:flex;gap:8px;color:var(--tx);margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}td,th{text-align:left;padding:6px 6px;border-bottom:1px solid var(--bd);vertical-align:top}th{color:var(--mu);font-weight:500}
+.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pr)}
+.al{border-left:5px solid var(--ok)}.al.wn{border-left-color:var(--wn)}.al.bd{border-left-color:var(--bad)}.al dt{font-weight:600;font-size:13px;margin-top:8px}.al dd{margin:0;color:var(--mu)}
+.ban{background:var(--bad);color:#fff;border-radius:12px;padding:16px;margin-bottom:14px}.ban h2{margin:0 0 6px}.ban .btn{background:#fff;color:var(--bad);margin:4px 6px 0 0}
+.sy{display:flex;flex-wrap:wrap;gap:8px}.sy button{border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}.sy button.on{background:var(--bad);color:#fff;border-color:var(--bad)}
+pre{white-space:pre-wrap;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px;font:13px/1.5 ui-monospace,Menlo,monospace}
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:9px;z-index:9;max-width:90%}
+@media(max-width:800px){.app{display:block}aside{width:100%;height:auto;position:sticky;z-index:5;display:flex;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--bd);top:0}.logo{display:none}aside a{white-space:nowrap;padding:8px 10px}main{padding:14px}.g2{grid-template-columns:1fr}}
+@media print{aside,.noprint,#toast{display:none!important}.card{border:0}body{background:#fff;color:#000}}
+</style></head><body><div class="app"><aside id="nav"></aside><main id="main"></main></div><div id="toast" hidden></div>
+<script>
+const $=s=>document.querySelector(s),D=864e5,K='healthone.v1';
+const M={bp:['Blood pressure','mmHg'],glu:['Blood glucose','mg/dL'],hr:['Heart rate','bpm'],spo2:['Oxygen saturation','%'],wt:['Body weight','kg']};
+const LV=['Routine monitoring','Clinical attention required','Urgent medical assistance'],CL=['ok','wn','bd'],SH=['Routine','Attention','Urgent'];
+const PT={n:'Priya Nair',a:58,s:'Female',c:'Hypertension, type 2 diabetes (fictional)',al:'Penicillin (rash)',ec:'Rahul Nair (son) · +00 00000 00000 (fictional)'};
+const MEDS=[{n:'Amlodipine 5 mg',t:'08:00',i:'Once daily, morning'},{n:'Metformin 500 mg',t:'08:00',i:'Twice daily, with meals'},{n:'Metformin 500 mg',t:'20:00',i:'Twice daily, with meals'},{n:'Atorvastatin 20 mg',t:'21:00',i:'Once daily, evening'}];
+const PAST=[4,4,3,4,2,4];
+const CITIES={Delhi:'Asia/Kolkata',London:'Europe/London','New York':'America/New_York',Dubai:'Asia/Dubai',Singapore:'Asia/Singapore',Sydney:'Australia/Sydney','Los Angeles':'America/Los_Angeles',Tokyo:'Asia/Tokyo'};
+const BPQ=[['Is the device clinically validated?',20,'Use an upper-arm device that appears on a validated-device list.'],['Is the cuff the correct size for the arm?',15,'Measure arm circumference and use the matching cuff size.'],['Is the cuff positioned correctly (bare upper arm, lower edge above the elbow)?',10,'Place the cuff on bare skin, snug, with the marker over the artery.'],['Is the patient seated with back supported?',10,'Sit in a chair with your back against the backrest.'],['Are both feet flat on the floor (legs uncrossed)?',10,'Uncross legs and rest both feet flat.'],['Is the arm supported at heart level?',15,'Rest the arm on a table so the cuff is at heart level.'],['Has the patient rested quietly for 5 minutes?',10,'Sit quietly for 5 full minutes before measuring.'],['Did the patient avoid talking or moving during measurement?',10,'Stay still and silent until the reading finishes.']];
+const SYM=['Chest pain','Severe breathlessness','Sudden facial drooping','Arm weakness','Difficulty speaking','Fainting or unconsciousness','Severe allergic reaction','Seizure'];
+const TCK=['Carry all medicines in hand luggage, in original packaging, with prescriptions','Get a clinician letter listing conditions, medicines and allergy (penicillin)','Pack BP monitor, spare batteries and glucose testing supplies','Check travel insurance covers pre-existing conditions','Note the local emergency number at the destination','Plan meals and hydration for long flights; move regularly','Save HealthOne emergency summary offline'];
+const TH={sH:140,dH:90,sU:180,dU:120,sL:90,gH:180,gU:300,gL:70,hH:100,hL:50,oL:94,oU:90};
+const TL={sH:'BP systolic high',dH:'BP diastolic high',sU:'BP systolic urgent',dU:'BP diastolic urgent',sL:'BP systolic low',gH:'Glucose high (mg/dL)',gU:'Glucose very high',gL:'Glucose low',hH:'Heart rate high',hL:'Heart rate low',oL:'SpO₂ low',oU:'SpO₂ urgent'};
+const dk=()=>new Date().toISOString().slice(0,10),iso=n=>new Date(Date.now()+n*D).toISOString().slice(0,10);
+function def(){const r={bp:[],glu:[],hr:[],spo2:[],wt:[]};for(let i=9;i>=0;i--){const t=Date.now()-i*D-3600e3*(i%3),n=9-i;
+r.bp.push({t,s:126+Math.round(n*1.8+(i*7)%5),d:80+Math.round(n*.7+i%3),p:72+(i%4)*2,rel:i%4==0?58:86});r.glu.push({t,v:104+(i*13)%22+(n>6?12:0)});r.hr.push({t,v:70+(i*5)%9});r.spo2.push({t,v:97-(i%3==0?1:0)});r.wt.push({t,v:+(71.4-n*.05+(i%3)*.1).toFixed(1)})}
+const s={r,al:[],sym:[],th:{...TH},today:{d:dk(),k:{}},trip:{o:'Delhi',d:'London',dep:iso(21),ret:iso(35)},tc:{}};s.al=[evalR(s,'bp',r.bp[9],false)];return s}
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}if(!S)S=def();if(S.today.d!=dk())S.today={d:dk(),k:{}};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,3800)};
+const ft=t=>new Date(t).toLocaleString([],{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const fv=(m,r)=>m=='bp'?r.s+'/'+r.d:r.v;
+const ser=m=>m=='bp'?[S.r.bp.map(x=>x.s),S.r.bp.map(x=>x.d)]:[S.r[m].map(x=>x.v)];
+function spark(sr,h){const W=300,all=sr.flat(),lo=Math.min(...all),hi=Math.max(...all),p=8,n=sr[0].length;const X=i=>p+i*(W-2*p)/(n-1),Y=v=>h-p-(v-lo)/((hi-lo)||1)*(h-2*p);
+return`<svg class="sp" viewBox="0 0 ${W} ${h}" role="img" aria-label="Trend chart, ${lo} to ${hi}">`+sr.map((a,k)=>`<polyline fill="none" stroke="var(--pr)" stroke-width="2" opacity="${k?.45:1}" points="${a.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/><circle cx="${X(n-1)}" cy="${Y(a[n-1])}" r="3.5" fill="var(--pr)" opacity="${k?.45:1}"/>`).join('')+`<text x="${p}" y="${h-1}" font-size="10" fill="var(--mu)">min ${lo}</text><text x="${W-p}" y="${h-1}" font-size="10" text-anchor="end" fill="var(--mu)">max ${hi}</text></svg>`}
+const chip=l=>`<span class="chip ${CL[l]}">${SH[l]}</span>`;
+const recentSym=()=>S.sym.some(x=>Date.now()-x.t<864e5);
+function evalR(s,m,r,symp){const th=s.th,prior=s.r[m].filter(x=>x.t<r.t).slice(-4);let lv=0,what='',why='',next='Keep your routine monitoring schedule.';
+const rel=m=='bp'?(r.rel>=80?`Reliability ${r.rel}/100 — good technique; the number can be taken at face value.`:r.rel>=50?`Reliability ${r.rel}/100 — moderate; fix the flagged steps and repeat before relying on it.`:`Reliability ${r.rel}/100 — low; treat this number with caution and repeat correctly.`):'Reliability is scored for BP only in this demo; confirm device and technique.';
+const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
+if(m=='bp'){const{s:S_,d}=r;what=`BP ${S_}/${d} mmHg recorded.`;why='Blood pressure helps track cardiovascular risk over time.';
+if(S_>=th.sU||d>=th.dU){lv=2;what=`BP ${S_}/${d} is at or above the urgent demo threshold (${th.sU}/${th.dU}).`;why='Very high pressure can strain the heart, brain and kidneys, particularly if symptoms are present.';next='Rest quietly for 5 minutes and repeat correctly. If still this high, or you feel unwell, contact your clinician or urgent care now.'}
+else if(S_<th.sL){lv=1;what=`Systolic ${S_} is below the demo low threshold (${th.sL}).`;why='Low pressure can cause dizziness or falls.';next='Sit or lie down, drink fluids if appropriate, and contact your clinician today. Do not change medicines yourself.'}
+else if(S_>=th.sH||d>=th.dH){lv=1;what=`BP ${S_}/${d} is above the demo thresholds (${th.sH}/${th.dH}).`;why='Repeated raised readings may need a clinician review of your plan.';next='Repeat after correct technique; share the pattern with your clinician. Do not change medicines yourself.'}
+else if(prior.length>2&&S_-avg(prior.map(x=>x.s))>=10){lv=1;what=`Systolic is ${Math.round(S_-avg(prior.map(x=>x.s)))} mmHg above your recent average.`;why='A rising trend can matter even when single readings look acceptable.';next='Keep logging with good technique and book a routine review.'}
+else{what=`BP ${S_}/${d} is within demo thresholds.`;why='No concerning pattern found by the demo rules.'}}
+else if(m=='glu'){const v=r.v;what=`Glucose ${v} mg/dL.`;why='Glucose helps show how well diabetes is controlled.';
+if(v>=th.gU){lv=2;what=`Glucose ${v} is at or above the very-high demo threshold (${th.gU}).`;why='Very high glucose can become dangerous, especially with vomiting, thirst or drowsiness.';next='Contact your clinician or urgent care now, following your care plan.'}
+else if(v<th.gL){lv=1;what=`Glucose ${v} is below the demo low threshold (${th.gL}).`;why='Low glucose can cause confusion or fainting.';next='Follow your clinician-approved low-glucose plan and recheck. Seek urgent help if confused or faint.'}
+else if(v>=th.gH){lv=1;what=`Glucose ${v} is above the demo high threshold (${th.gH}).`;why='Persistent high readings may need review.';next='Note meals and timing, and share with your clinician. Do not change medicines yourself.'}}
+else if(m=='hr'){const v=r.v;what=`Heart rate ${v} bpm.`;why='Resting heart rate reflects rhythm and fitness.';if(v>th.hH||v<th.hL){lv=1;what=`Heart rate ${v} is outside the demo range (${th.hL}–${th.hH}).`;why='Unusually fast or slow rates can have many causes.';next='Rest and recheck in a few minutes; contact your clinician if it persists or you have symptoms.'}}
+else if(m=='spo2'){const v=r.v;what=`Oxygen saturation ${v}%.`;why='Oxygen level shows how well the lungs supply blood.';
+if(v<th.oU){lv=2;what=`SpO₂ ${v}% is below the urgent demo threshold (${th.oU}%).`;why='Low oxygen can signal a serious breathing problem.';next='Seek urgent medical assistance now.'}else if(v<th.oL){lv=1;what=`SpO₂ ${v}% is below the demo threshold (${th.oL}%).`;why='Could reflect a poor reading or a breathing problem.';next='Warm hands, sit still, recheck. Contact your clinician if it stays low.'}}
+else{const v=r.v,p=prior.length?prior[prior.length-1].v:v;what=`Weight ${v} kg.`;why='Weight tracks long-term health and fluid changes.';if(Math.abs(v-p)>=2){lv=1;what=`Weight changed ${(v-p).toFixed(1)} kg since the previous reading.`;why='Rapid change can reflect fluid or other issues.';next='Re-weigh at the same time of day and tell your clinician if confirmed.'}}
+if(symp){lv=2;what+=' Concerning symptoms reported.';why='Symptoms override measurement results: a normal reading does not rule out a serious problem.';next='Seek emergency care now. Do not wait to repeat measurements.'}
+return{t:Date.now(),m,lv,what,why,rel,next}}
+function addR(m,rec,symp){S.r[m].push(rec);const a=evalR(S,m,rec,symp||recentSym());S.al.unshift(a);S.al=S.al.slice(0,30);save();return a}
+function alCard(a){return`<div class="card al ${CL[a.lv]}"><div>${chip(a.lv)} <b>${LV[a.lv]}</b> <small>· ${M[a.m][0]} · ${ft(a.t)}</small></div><dl><dt>What happened</dt><dd>${a.what}</dd><dt>Why it might matter</dt><dd>${a.why}</dd><dt>How reliable is the measurement</dt><dd>${a.rel}</dd><dt>What to do next</dt><dd>${a.next}</dd></dl>${a.lv==2?'<button class="btn red" onclick="go(\'emergency\')">Open emergency assistance</button>':''}<p class="sm">Demonstration rule — not a diagnosis or clinician-approved protocol.</p></div>`}
+const last=m=>S.r[m][S.r[m].length-1];
+const adh=()=>{const n=Object.keys(S.today.k).length;return Math.round((PAST.reduce((a,b)=>a+b,0)+n)/28*100)};
+const demo='<div class="demo"><b>Demonstration only.</b> Fictional patient and data. Thresholds are demo values, not clinician-approved protocols. HealthOne does not diagnose or change medication.</div>';
+const mcard=m=>{const r=last(m),l=evalR(S,m,r,false).lv,pv=S.r[m].slice(-4,-1).reverse().map(x=>fv(m,x)).join(', ');return`<div class="card"><div class="sm">${M[m][0]}</div><div class="big">${fv(m,r)} <small>${M[m][1]}</small></div><div>${chip(l)} <small>${ft(r.t)}</small></div>${spark(ser(m),60)}<div class="sm">Previous: ${pv}</div></div>`};
+function doses(){return MEDS.map((x,i)=>`<label class="chk"><input type="checkbox" ${S.today.k[i]?'checked':''} onchange="dose(${i})">${x.t} · ${x.n} <small>(${x.i})</small></label>`).join('')}
+const dose=i=>{S.today.k[i]?delete S.today.k[i]:S.today.k[i]=1;save();render()};
+let cur=location.hash.slice(1)||'overview',E=new Set(),flt=-1;
+const NAV=[['overview','Overview','◧'],['health','My Health','♡'],['bp','BP Measurement','◉'],['insights','Clinical Insights','◈'],['emergency','Emergency Assistance','✚'],['travel','Travel Assistant','✈'],['reports','Health Reports','▤'],['settings','Settings','⚙']];
+function hand(){const sy=[...E].map(i=>SYM[i]).join(', ')||'None selected';return`HEALTHONE EMERGENCY HANDOVER (DEMO DATA — not a medical record)
+Time: ${new Date().toLocaleString()}
+Patient: ${PT.n}, ${PT.a}, ${PT.s}
+Reported red-flag symptoms: ${sy}
+Allergies: ${PT.al}
+Known conditions: ${PT.c}
+Medications: ${MEDS.map(x=>x.n+' ('+x.t+')').join('; ')}
+Latest readings: ${Object.keys(M).map(m=>M[m][0]+' '+fv(m,last(m))+' '+M[m][1]+' ('+ft(last(m).t)+')').join('; ')}
+Emergency contact: ${PT.ec}`}
+function off(tz,d){const p=new Intl.DateTimeFormat('en',{timeZone:tz,timeZoneName:'longOffset'}).formatToParts(d).find(x=>x.type=='timeZoneName').value,m=p.match(/([+-])(\d+)(?::(\d+))?/);return m?(m[1]=='-'?-1:1)*(+m[2]*60+(+(m[3]||0))):0}
+const V={
+overview(){const al=S.al.slice(0,2),ev=Object.keys(M).flatMap(m=>S.r[m].map(r=>({m,r}))).sort((a,b)=>b.r.t-a.r.t).slice(0,6),pc=adh();
+return`<h1>Overview</h1><p class="mu">Your health, monitored intelligently. Anytime. Anywhere.</p>${demo}
+<div class="g2"><div class="card"><h3>Patient profile</h3><b>${PT.n}</b> · ${PT.a} · ${PT.s}<div class="sm">${PT.c}<br>Allergies: ${PT.al}</div></div>
+<div class="card"><h3>Medication adherence (7 days)</h3><div class="big">${pc}%</div><div class="bar"><i style="width:${pc}%"></i></div><div class="sm">Demo history plus today’s doses you tick in My Health.</div></div></div>
+<div class="grid">${Object.keys(M).map(mcard).join('')}</div>
+<div class="g2"><div class="card"><h3>Health alerts</h3>${al.map(a=>`<p>${chip(a.lv)} ${a.what}</p>`).join('')}<button class="btn sec" onclick="go('insights')">View all insights</button></div>
+<div class="card"><h3>Upcoming reminders</h3>${MEDS.map((x,i)=>S.today.k[i]?'':`<div>${x.t} · ${x.n}</div>`).join('')||'All of today’s doses ticked.'}<div>Evening BP check · guided measurement</div><div>Pre-travel consultation · by ${new Date(new Date(S.trip.dep)-28*D).toLocaleDateString([],{day:'numeric',month:'short'})}</div></div></div>
+<div class="card"><h3>Recent activity</h3><table>${ev.map(e=>`<tr><td>${M[e.m][0]}</td><td><b>${fv(e.m,e.r)}</b> ${M[e.m][1]}</td><td>${ft(e.r.t)}</td></tr>`).join('')}</table></div>`},
+health(){return`<h1>My Health</h1><p class="mu">Detailed trends, quick entries and today’s medicines.</p>${demo}
+<div class="card"><h3>Today’s medicines</h3>${doses()}<div class="sm">Never double or skip doses to catch up — ask your clinician or pharmacist.</div></div>
+${Object.keys(M).map(m=>{const sr=ser(m);return`<div class="card"><h3>${M[m][0]} ${chip(evalR(S,m,last(m),false).lv)}</h3>${spark(sr,110)}<table>${S.r[m].slice(-5).reverse().map(r=>`<tr><td>${ft(r.t)}</td><td><b>${fv(m,r)}</b> ${M[m][1]}</td>${m=='bp'?`<td>pulse ${r.p} · reliability ${r.rel}</td>`:'<td></td>'}</tr>`).join('')}</table>
+${m=='bp'?'<button class="btn sec noprint" onclick="go(\'bp\')">Take a guided BP measurement</button>':`<div class="row noprint" style="margin-top:10px;align-items:end"><label>New value (${M[m][1]})<input id="q_${m}" type="number" step="0.1"></label><button class="btn" onclick="quick('${m}')">Add</button></div>`}</div>`}).join('')}`},
+bp(){return`<h1>Guided BP measurement</h1><p class="mu">Complete every checklist item, then enter the reading.</p>${demo}
+<div class="g2"><div class="card"><h3>1. Checklist</h3>${BPQ.map((q,i)=>`<div class="q"><span>${i+1}. ${q[0]}</span><span class="rad">${[['1','Yes'],['0','No'],['u','Unsure']].map(o=>`<label><input type="radio" name="c${i}" value="${o[0]}" onchange="upd()">${o[1]}</label>`).join('')}</span></div>`).join('')}
+<h3 style="margin-top:14px">2. Reading</h3><div class="row"><label>Systolic<input id="bs" type="number"></label><label>Diastolic<input id="bd" type="number"></label><label>Pulse<input id="bpp" type="number"></label></div>
+<label class="chk"><input type="checkbox" id="bsy"> I have concerning symptoms right now (chest pain, severe headache, breathlessness, weakness, confusion)</label><button class="btn" onclick="saveBP()">Save reading &amp; interpret</button></div>
+<div><div class="card" id="sc"></div><div id="res"></div></div></div>`},
+insights(){const al=S.al.filter(a=>flt<0||a.lv==flt);return`<h1>Clinical insights</h1><p class="mu">Rule-based interpretation using configurable demo thresholds (see Settings).</p>${demo}
+<div class="card noprint">${[-1,0,1,2].map(l=>`<button class="btn ${flt==l?'':'sec'}" style="margin-right:6px" onclick="flt=${l};render()">${l<0?'All ('+S.al.length+')':LV[l]+' ('+S.al.filter(a=>a.lv==l).length+')'}</button>`).join('')}</div>${al.map(alCard).join('')||'<div class="card">No alerts in this category.</div>'}<p class="sm">Reliability and severity are separate: a reliable reading can be dangerous, and an unreliable one can still need attention. No diagnoses or medication changes are produced.</p>`},
+emergency(){return`<h1>Emergency assistance</h1><p class="mu">Select any symptom you have right now. Guidance appears immediately.</p>
+${E.size?`<div class="ban" role="alert"><h2>Possible emergency — act now</h2><p><b>Call your local emergency number or go to the nearest emergency department immediately.</b> Examples: 112 (India, EU), 911 (US), 999 (UK). Do not drive yourself. Do not wait to take more measurements.</p><button class="btn" onclick="toast('DEMONSTRATION: no call was placed. Use your phone to call emergency services.')">Call emergency services (demo — no call made)</button><button class="btn" onclick="toast('DEMONSTRATION: no notification was sent to any contact.')">Notify emergency contact (demo — nothing sent)</button></div>`:''}
+<div class="card"><h3>Red-flag symptoms</h3><div class="sy">${SYM.map((s,i)=>`<button class="${E.has(i)?'on':''}" aria-pressed="${E.has(i)}" onclick="tsym(${i})">${s}</button>`).join('')}</div><p><button class="btn sec" onclick="clrSym()">Symptoms resolved / selected by mistake — clear</button></p></div>
+<div class="card"><h3>Patient information</h3><div class="sm">Allergies: <b>${PT.al}</b> · Contact: ${PT.ec}</div><table>${Object.keys(M).map(m=>`<tr><td>${M[m][0]}</td><td><b>${fv(m,last(m))}</b> ${M[m][1]}</td><td>${ft(last(m).t)}</td></tr>`).join('')}</table><div class="sm">Medications: ${MEDS.map(x=>x.n).join(', ')}</div></div>
+<div class="card"><h3>Emergency handover summary</h3><pre id="hand">${hand()}</pre><button class="btn sec" onclick="cp('#hand')">Copy summary</button></div>`},
+travel(){const T=S.trip,sel=(id,v)=>`<select id="${id}" onchange="tset()">${Object.keys(CITIES).map(c=>`<option ${c==v?'selected':''}>${c}</option>`).join('')}</select>`;
+const dt=new Date(T.dep+'T12:00:00Z'),df=off(CITIES[T.d],dt)-off(CITIES[T.o],dt),rt=new Date(T.ret+'T12:00:00Z'),dr=off(CITIES[T.o],rt)-off(CITIES[T.d],rt);
+const cv=h=>{let m=(+h.slice(0,2))*60+(+h.slice(3))+df,dy=Math.floor(m/1440);m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')+(dy?` (${dy>0?'+':''}${dy} day)`:'')};
+const sg=x=>(x>=0?'+':'−')+Math.floor(Math.abs(x)/60)+'h'+(Math.abs(x)%60?Math.abs(x)%60+'m':'');const dd=Math.round((new Date(T.dep)-new Date())/D);
+return`<h1>Travel assistant</h1><p class="mu">Time-zone aware reminders for your trip.</p>${demo}
+<div class="card"><div class="row"><label>Current location${sel('to',T.o)}</label><label>Destination${sel('td',T.d)}</label><label>Departure<input type="date" id="tdep" value="${T.dep}" onchange="tset()"></label><label>Return<input type="date" id="tret" value="${T.ret}" onchange="tset()"></label></div></div>
+<div class="card"><h3>Time-zone difference</h3>${T.d} is <b>${sg(df)}</b> from ${T.o} on departure; ${T.o} will be <b>${sg(dr)}</b> from ${T.d} on return. Local time in ${T.d} now: ${new Date().toLocaleTimeString([],{timeZone:CITIES[T.d],hour:'2-digit',minute:'2-digit'})}.</div>
+<div class="card"><h3>Medication reminders in destination local time</h3><div class="demo">Simulated schedule — requires clinician approval. HealthOne never changes doses, frequencies or prescriptions, and you must not double or skip doses to adjust for time zones.</div><table><tr><th>Medicine</th><th>Instruction (unchanged)</th><th>Home time</th><th>In ${T.d}</th></tr>${MEDS.map(x=>`<tr><td>${x.n}</td><td>${x.i}</td><td>${x.t}</td><td>${cv(x.t)}</td></tr>`).join('')}</table></div>
+<div class="g2"><div class="card"><h3>Monitoring reminder adjustments</h3><p>Suggested: keep morning and evening BP/glucose checks at the same <i>home-clock</i> times for the first 2–3 days (${cv('08:00')} and ${cv('20:00')} in ${T.d}), and note the local time with each reading. Ask your clinician whether to shift schedules.</p><p class="sm">Demo suggestion, not clinical advice.</p></div>
+<div class="card"><h3>Pre-travel consultation</h3>${dd<0?'Departure date has passed.':dd<28?`Departure is in ${dd} days — contact your clinician <b>now</b> to review your travel plan.`:`Suggested: book a review about 4 weeks before departure, by <b>${new Date(new Date(T.dep)-28*D).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</b>.`}</div></div>
+<div class="card"><h3>Travel health checklist</h3>${TCK.map((c,i)=>`<label class="chk"><input type="checkbox" ${S.tc[i]?'checked':''} onchange="tck(${i})">${c}</label>`).join('')}</div>`},
+reports(){const tr=m=>{const a=S.r[m],f=a[0],l=a[a.length-1];const x=m=='bp'?l.s-f.s:l.v-f.v;return`${x>0?'up':x<0?'down':'stable'} ${m=='bp'?Math.abs(x)+' mmHg systolic':Math.abs(+x.toFixed(1))+' '+M[m][1]} over ${a.length} readings`};
+const bps=S.r.bp,ar=Math.round(bps.reduce((a,b)=>a+b.rel,0)/bps.length),T=S.trip;
+return`<h1>Health report</h1><p class="mu">Concise summary for sharing with a clinician.</p>${demo}<div class="noprint"><button class="btn" onclick="window.print()">Print / save as PDF</button> <button class="btn sec" onclick="cp('#rep')">Copy text</button></div><div class="card" id="rep" style="margin-top:12px"><h2>HealthOne clinical health report <small>(demo data)</small></h2><p>Generated ${new Date().toLocaleString()}</p>
+<h3>Patient</h3><p>${PT.n}, ${PT.a}, ${PT.s}. Conditions: ${PT.c}. Allergies: ${PT.al}.</p>
+<h3>Recent readings and trends</h3><table>${Object.keys(M).map(m=>`<tr><td>${M[m][0]}</td><td><b>${fv(m,last(m))}</b> ${M[m][1]} (${ft(last(m).t)})</td><td>${tr(m)}</td></tr>`).join('')}</table>
+<h3>Measurement reliability (BP)</h3><p>Latest ${last('bp').rel}/100; average ${ar}/100 (demo model, not clinically validated).</p>
+<h3>Symptoms</h3><p>${S.sym.length?S.sym.slice(-5).map(x=>x.n+' ('+ft(x.t)+')').join('; '):'None reported in HealthOne.'}</p>
+<h3>Medication adherence</h3><p>${adh()}% over 7 days (demo). Medicines: ${MEDS.map(x=>x.n+' '+x.i).join('; ')}.</p>
+<h3>Important alerts</h3>${S.al.slice(0,3).map(a=>`<p>${SH[a.lv]}: ${a.what} Next: ${a.next}</p>`).join('')}
+<h3>Travel</h3><p>${T.o} → ${T.d}, ${T.dep} to ${T.ret}. Simulated schedule; any medication timing needs clinician approval.</p><p class="sm">Thresholds are demonstration values, not clinician-approved protocols. HealthOne does not diagnose or change medication.</p></div>`},
+settings(){return`<h1>Settings</h1><p class="mu">Configurable demonstration thresholds, saved in this browser.</p>${demo}<div class="card"><div class="row">${Object.keys(TH).map(k=>`<label>${TL[k]}<input id="th_${k}" type="number" value="${S.th[k]}"></label>`).join('')}</div><button class="btn" onclick="sth()">Save thresholds</button> <button class="btn sec" onclick="S.th={...TH};save();render();toast('Defaults restored')">Restore defaults</button></div>
+<div class="card"><h3>Demo data</h3><p class="sm">Data stays in this browser’s local storage. No devices are connected; all device input is manual.</p><button class="btn red" onclick="if(confirm('Reset all demo data?')){S=def();save();E.clear();render()}">Reset demo data</button></div>`}};
+function render(){$('#nav').innerHTML='<div class="logo"><b>Health</b>One<small>Your health, monitored intelligently.</small></div>'+NAV.map(n=>`<a class="${cur==n[0]?'on':''} ${n[0]=='emergency'?'em':''}" onclick="go('${n[0]}')"><span>${n[2]}</span>${n[1]}</a>`).join('');$('#main').innerHTML=V[cur]();if(cur=='bp')upd()}
+function go(v){cur=v;location.hash=v;render();scrollTo(0,0)}
+function quick(m){const v=parseFloat($('#q_'+m).value);const ok={glu:[20,600],hr:[20,250],spo2:[50,100],wt:[20,300]}[m];if(isNaN(v)||v<ok[0]||v>ok[1])return toast('Enter a realistic value ('+ok[0]+'–'+ok[1]+')');const a=addR(m,{t:Date.now(),v});render();toast(LV[a.lv]);if(a.lv==2)go('insights')}
+function bpScore(){const an=BPQ.map((q,i)=>{const e=document.querySelector(`input[name=c${i}]:checked`);return e?e.value:null});return{an,pts:an.map((a,i)=>a=='1'?BPQ[i][1]:a=='u'?Math.round(BPQ[i][1]*.3):0)}}
+function upd(){const{an,pts}=bpScore(),sc=pts.reduce((a,b)=>a+b,0),n=an.filter(a=>a).length,lost=100-sc,lab=sc>=80?'Higher confidence':sc>=50?'Moderate confidence':'Low confidence',l=sc>=80?0:sc>=50?1:2;
+$('#sc').innerHTML=`<h3>Measurement reliability</h3><div class="big">${sc}<small>/100</small> ${chip(l).replace(SH[l],lab)}</div><div class="bar"><i style="width:${sc}%"></i></div><p class="sm">${n}/8 answered. Unanswered counts 0; “Unsure” earns 30%. <b>Illustrative demo model — not clinically validated.</b></p>
+${lost?`<table><tr><th>Factor</th><th>Pts</th><th>Fix</th></tr>${BPQ.map((q,i)=>an[i]=='1'?'':`<tr><td>${q[0].replace(/^Is |^Has |^Did |\?$/g,'')}</td><td>${pts[i]}/${q[1]}</td><td>${q[2]}</td></tr>`).join('')}</table><p>Correcting these could raise the score from <b>${sc}</b> to up to <b>100</b>.</p>`:'<p>All factors satisfied.</p>'}<p class="sm">Reliability ≠ severity: a reliable reading can still be dangerous, and an unreliable one can still need attention.</p>`}
+function saveBP(){const s=+$('#bs').value,d=+$('#bd').value,p=+$('#bpp').value,{an,pts}=bpScore();if(an.includes(null))return toast('Please answer all 8 checklist items first.');if(!(s>=50&&s<=260&&d>=30&&d<=160&&s>d&&p>=30&&p<=220))return toast('Enter realistic systolic, diastolic (systolic higher) and pulse values.');
+const a=addR('bp',{t:Date.now(),s,d,p,rel:pts.reduce((x,y)=>x+y,0)},$('#bsy').checked);$('#res').innerHTML=alCard(a);toast('Reading saved')}
+function tsym(i){if(E.has(i))E.delete(i);else{E.add(i);S.sym.push({t:Date.now(),n:SYM[i]});save()}render()}
+function clrSym(){E.clear();S.sym=S.sym.filter(x=>Date.now()-x.t>=864e5);save();render()}
+function cp(s){const t=$(s).innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copied'),()=>toast('Copy blocked here — select the text and copy manually'))}
+function tset(){S.trip={o:$('#to').value,d:$('#td').value,dep:$('#tdep').value||S.trip.dep,ret:$('#tret').value||S.trip.ret};save();render()}
+const tck=i=>{S.tc[i]=!S.tc[i];save()};
+function sth(){for(const k in TH){const v=parseFloat($('#th_'+k).value);if(isNaN(v))return toast('All thresholds need numbers');S.th[k]=v}save();toast('Thresholds saved (demo values)')}
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(V[h]&&h!=cur){cur=h;render()}});if(!V[cur])cur='overview';render();
+</script></body></html>
